@@ -27,58 +27,51 @@ menu()
 #     except ValueError:
 #         print("Sorry thats not a level, please enter 1 to 3 only!")
 
-def level(dif):
+def level(difficulty):
 
-    if level(dif) == 1:
+    if level(difficulty) == 1:
         myNumber= random.randint(1,10)
-    elif level(dif) == 2:
+    elif level(difficulty) == 2:
         myNumber= random.randint(1,50)
-    elif level(dif) == 3:
+    elif level(difficulty) == 3:
         myNumber= random.randint(1,100)
     
-correct_number_10 = random.randint(1,10)
+correctnumber10 = random.randint(1,10)
 
-correct_number_50 = random.randint(1,50)
+correctnumber50 = random.randint(1,50)
 
-correct_number_100 = random.randint(1,100)
+correctnumber100 = random.randint(1,100)
 
 maxguess = 0
-difficulty = input ("which level wil you chooooseee ")
+difficulty = input ("which level woukd you like to select: ")
 
 
 while int(difficulty) == 1:
 
         guess = input("pick a number from 1-10:")
-
         if maxguess > 3:
 
             os.system('cls')
 
             menu()
 
-            print("should have figured it out by now TOO MANY GUESES")
-
-            correct_number_10 = random.randint(1,10)
-
-            correct_number_50 = random.randint(1,50)
-
-            correct_number_100 = random.randint(1,100)
+            print("should have figured it out by now TOO MANY GUESES the number was")
 
             quit()
 
-        if int(guess) > correct_number_10:
+        if int(guess) > correctnumber10:
 
             print("number is too big, try smaller")
 
             maxguess = maxguess + 1
 
-        if int(guess) < correct_number_10:
+        if int(guess) < correctnumber10:
 
             print("number is too small, try  bigger")
 
             maxguess = maxguess + 1
 
-        if int(guess) == correct_number_10:
+        if int(guess) == correctnumber10:
 
             answer = input("that is correct, would you like to play again [YA OR NAW]  ")
 
@@ -88,15 +81,12 @@ while int(difficulty) == 1:
 
                 menu()
 
-                correct_number_10 = random.randint(1,10)
-
-                correct_number_50 = random.randint(1,50)
-
-                correct_number_100 = random.randint(1,100)
+                difficulty = input ("which level would you like to select: ")
 
             if answer == "NAW":
 
                 quit()
+          
 
 
 maxguess = 0
@@ -105,7 +95,7 @@ while int(difficulty) == 2:
 
         guess = input("pick a number from 1 to 50: ")
 
-        if maxguess > 3:
+        if maxguess > 5:
 
             os.system('cls')
 
@@ -113,27 +103,21 @@ while int(difficulty) == 2:
 
             print("should have figured it out by now TOO MANY GUESES")
 
-            correct_number_50 = random.randint(1,10)
-
-            correct_number_50 = random.randint(1,50)
-
-            correct_number_50 = random.randint(1,100)
-
             quit()
 
-        if int(guess) > correct_number_50:
+        if int(guess) > correctnumber50:
 
             print( "number is too big, try smaller ")
 
             maxguess = maxguess + 1
 
-        if int(guess) < correct_number_50:
+        if int(guess) < correctnumber50:
 
             print("number is too small, try  bigger ")
 
             maxguess = maxguess + 1
 
-        if int(guess) == correct_number_50:
+        if int(guess) == correctnumber50:
 
             answer = input("that is correct, would you like to play again [YA OR NAW] ")
 
@@ -142,12 +126,7 @@ while int(difficulty) == 2:
                 os.system('cls')
 
                 menu()
-
-                correct_number_10 = random.randint(1,10)
-
-                correct_number_50 = random.randint(1,50)
-
-                correct_number_100 = random.randint(1,100)
+                difficulty = input ("which level would you like to select: ")
 
             if answer == "NAW":
 
@@ -157,9 +136,9 @@ maxguess = 0
 
 while int(difficulty) == 3:
 
-        guess = input("pick a number form 1 to 100: ")
+        guess = input("pick a number from 1 to 100: ")
 
-        if maxguess > 3:
+        if maxguess > 7:
 
             os.system('cls')
 
@@ -167,42 +146,34 @@ while int(difficulty) == 3:
 
             print("should have figured it out by now TOO MANY GUESES")
 
-            correct_number_10 = random.randint(1,10)
-
-            correct_number_50 = random.randint(1,50)
-
-            correct_number_100 = random.randint(1,100)
 
             quit()
 
-        if int(guess) > correct_number_100:
+        if int(guess) > correctnumber100:
 
             print("number is too big, try smaller")
 
             maxguess = maxguess + 1
 
-        if int(guess) < correct_number_100:
+        if int(guess) < correctnumber100:
 
             print("number is too small, try  bigger")
 
             maxguess = maxguess + 1
 
-        if int(guess) == correct_number_100:
+        if int(guess) == correctnumber100:
 
             answer = input("that is correct, would you like to play again [YA OR NAW]")
 
             if answer == "YA":
+                
 
                 os.system('cls')
 
                 menu()
+                difficulty = input ("which level would you like to select: ")
 
-                correct_number_10 = random.randint(1,10)
-
-                correct_number_50 = random.randint(1,50)
-
-                correct_number_100 = random.randint(1,100)
-
-            if answer == "NAW":
-
+                
+                if answer == "NAW":
+                    print(" quitter ")
                 quit()
