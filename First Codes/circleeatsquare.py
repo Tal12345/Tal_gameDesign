@@ -3,75 +3,73 @@
 #use keys to move objects
 #Using Dictionaries
 
-#Objective of the game is for the rect to run away fom the circle, if they collide the circle etas the square, 
-#circle will  get larger, and a new rect should appear somewhere on the screen
-# K_UP                  up circle
-# K_DOWN                down circle
-# K_RIGHT               right circle
-# K_LEFT                left circle
-# K_a                   left square
-# K_d                   right square
-# K_w                   up square
-# K_s                   down square
-#initialize pygame
+
+#objective of the game: the rectangle to run away from the circle. if they collide the circle eats the square
+#circle will get larger and new rectangle should appear somewhere on the screen
+
 import os, random, time, pygame
+os.system('cls')
 #initialize pygame
 pygame.init()
 
-#Declare constants, variables, list, dictionaries, any object
-#scree size
-WIDTH=700
-HEIGHT=700
-check=True #for the while loop
-move=5 #pixels
+#declare constants, variables, init, dictionaries
+#suare size
+WIDTH = 700
+HEIGHT = 500
+check = True #for the while loop
+move = 5 #5 pixels
 #square variables
-xs=20
-ys=20
-wbox=30
-hbox=30
+xs = 20
+ys = 20
+wbox = 30
+hbox = 30
 #circle variables
-rad=15
-xc=random.randint(rad, WIDTH-rad)
-yc=random.randint(rad, HEIGHT-rad)
-#creating the rect object
-square=pygame.Rect(xs,ys,wbox,hbox)
-
-#create screen
-screen=pygame.display.set_mode((WIDTH,HEIGHT))
-pygame.display.set_caption('Circle eats Square')
-
+radius = 15
+xc = random.randint(15, WIDTH-radius)
+yc = random.randint(15, HEIGHT-radius)
+#square
+square = pygame.Rect(xs, ys, wbox, hbox)
+#screen
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption('cirlce eats square')
 #define colors
-colors={'white':[255,255,255], 'red':[255,0,0], 'aqua':[102,153, 255],
-'orange':[255,85,0],'purple':[48,25,52],'navy':[5,31,64],'pink':[200,3,75]}
+colors= {'white':[255,255,255],'red':[255,0,0],'blueish':[102, 153, 255], 'orange':[255, 85, 0], 'purple': [48, 25, 52], 'navy': [5,31,64], 'pink':[200, 3, 75]}
 
-#Get colors
-background= colors.get('pink')
-sq_color=colors.get('navy')
-cr_color=colors.get('white')
+background = colors.get('pink')
+sq_color = colors.get('navy')
+cr_color = colors.get('white')
+
 while check:
+    # pygame.draw.circle(screen, cr_color, (xc, yc), radius)
     screen.fill(background)
     for case in pygame.event.get():
-        if case.type==pygame.QUIT:
-            check=False
-    
+        if case.type == pygame.QUIT:
+            check = False
 
-    keys=pygame.key.get_pressed() #this returns a list
-    if keys[pygame.K_a] and square.x >=move:
-        square.x -= move #substract 5 from the x value
-    if keys[pygame.K_d] and square.x <WIDTH-wbox:
-        square.x += move
-    if keys[pygame.K_w]:
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_a] and square.x >= move:
+        square.x -= move #subtract 5 from the x value
+    if keys[pygame.K_d] and square.x < WIDTH - wbox:
+        square.x += move 
+    if keys[pygame.K_w] and square.y >= move:
         square.y -= move
-    if keys[pygame.K_s]:
-        square.y += move   
-#Finish circle
-    if keys[pygame.K_LEFT] and xc >=rad:
-        xc -= move #substract 5 from the x value
-    pygame.draw.rect(screen, sq_color, square)
-    pygame.draw.circle(screen, cr_color, (xc,yc), rad)
+    if keys[pygame.K_s] and square.y < HEIGHT - hbox:
+        square.y += move
+    #finished circle
+    if keys[pygame.K_LEFT] and xc >=radius:
+           xc -= move
+    if keys[pygame.K_RIGHT] and xc < WIDTH - wbox:
+           xc += move
+    if keys[pygame.K_UP] and yc >=radius:
+           yc -= move
+    if keys[pygame.K_DOWN] and yc < HEIGHT - hbox:
+           yc += move
 
+    pygame.draw.rect(screen, sq_color, square)
+    pygame.draw.circle(screen, cr_color, (xc, yc), radius)
     pygame.display.update()
-    pygame.time.delay(10)\
+    pygame.time.delay(10)
+
 
 
 
