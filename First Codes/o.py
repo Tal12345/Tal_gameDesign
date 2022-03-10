@@ -72,7 +72,7 @@ def splitdeck():
     plyr1=0
     plyr2=0
     print ('\n\n\n')
-
+    
 tempPlayer1=[]
 tempPlayer2=[]
 def Tempdeck(winner,i):
@@ -115,7 +115,7 @@ def playgame():
             else:
                 print ('tie')
             print("Player I: "+str(plyr1)+"     Player II: "+ str(plyr2))
-
+2
 def endgame():
     print ()
     print ()
@@ -129,5 +129,5 @@ def playinggame():
     splitdeck()
     playgame()
 
-playinggame()
+playinggame()\
 

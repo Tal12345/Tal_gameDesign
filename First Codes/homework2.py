@@ -161,10 +161,10 @@ while int(difficulty) == 3:
 
             maxguess = maxguess + 1
 
-        if int(guess) == correctnumber100:?
+        if int(guess) == correctnumber100:
 
 
-        answer = input("that is correct, would you like to play again [YA OR NAW]")
+            answer = input("that is correct, would you like to play again [YA OR NAW]")
 
         if answer == "YA":
                 
