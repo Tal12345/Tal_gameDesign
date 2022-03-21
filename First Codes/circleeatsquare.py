@@ -6,6 +6,7 @@
 
 #objective of the game: the rectangle to run away from the circle. if they collide the circle eats the square
 #circle will get larger and new rectangle should appear somewhere on the screen
+#K_Space =jump
 
 import os, random, time, pygame
 os.system('cls')
@@ -39,6 +40,10 @@ background = colors.get('pink')
 sq_color = colors.get('navy')
 cr_color = colors.get('white')
 
+MAX=10
+jumpCount=MAX
+JUMP=False
+
 while check:
     # pygame.draw.circle(screen, cr_color, (xc, yc), radius)
     screen.fill(background)
@@ -49,26 +54,47 @@ while check:
     keys = pygame.key.get_pressed()
     if keys[pygame.K_a] and square.x >= move:
         square.x -= move #subtract 5 from the x value
-    if keys[pygame.K_d] and square.x < WIDTH - wbox:
+    if keys[pygame.K_d] and square.x < WIDTH - (wbox + move):
         square.x += move 
-    if keys[pygame.K_w] and square.y >= move:
-        square.y -= move
-    if keys[pygame.K_s] and square.y < HEIGHT - hbox:
-        square.y += move
+        #Jumping Part
+    if not JUMP:
+        if keys[pygame.K_w] and square.y >= move:
+            square.y -= move
+        if keys[pygame.K_s] and square.y < HEIGHT - (hbox + move):
+            square.y += move
+        if keys[pygame.K_SPACE]:
+            JUMP=True
+    else:
+        if jumpCount >=-MAX:
+            square.y -= jumpCount*abs(jumpCount)/2 
+            jumpCount-=1
+        else:
+            jumpCount=MAX
+            JUMP=False
+
     #finished circle
-    if keys[pygame.K_LEFT] and xc >=radius:
-           xc -= move
-    if keys[pygame.K_RIGHT] and xc < WIDTH - wbox:
-           xc += move
-    if keys[pygame.K_UP] and yc >=radius:
-           yc -= move
-    if keys[pygame.K_DOWN] and yc < HEIGHT - hbox:
-           yc += move
+    if keys[pygame.K_LEFT] and xc >=radius+ move:
+            xc -= move
+    if keys[pygame.K_RIGHT] and xc < WIDTH - (radius+move):
+            xc += move
+    if keys[pygame.K_UP] and yc >=radius+move:
+            yc -= move
+    if keys[pygame.K_DOWN] and yc < HEIGHT - (radius+move) :
+            yc += move
+
+    
+    checkCollide= square.collidepoint((xc,yc))
+    if checkCollide:
+        square.x= random.randint(wbox, WIDTH- wbox)
+        square.y = random.randint(hbox, HEIGHT-hbox)
+        radius+=move
 
     pygame.draw.rect(screen, sq_color, square)
     pygame.draw.circle(screen, cr_color, (xc, yc), radius)
     pygame.display.update()
     pygame.time.delay(10)
+
+    
 
 
 
