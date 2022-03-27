@@ -1,4 +1,3 @@
-#Tal Rogozinski
 #learning how to draw circles and rectangles
 #use keys to move objects
 #Using Dictionaries
@@ -16,16 +15,25 @@
 # K_SPACE               jump
 #initialize pygame
 import os, random, time, pygame, math
-from turtle import update
+from pickle import TRUE
 #initialize pygame
 pygame.init()
 
-
 #Declare constants, variables, list, dictionaries, any object
 #scree size
-
 WIDTH=700
 HEIGHT=700
+xMs=50
+yMs=250
+wb=30
+hb=30
+MAIN=TRUE
+INST=False
+SETT=False
+LEV_I=False
+#List f messages
+MenuList=['Instructions','Settings', " ssfsdf","dasdas",'fdgdfg','asdasd','asdasd']
+SettingList=['Screen Size','Font Size','C','BC']
 check=True #for the while loop
 move=5 #pixels
 #square variables
@@ -33,94 +41,10 @@ xs=20
 ys=20
 wbox=30
 hbox=30
-wind=pygame.display.set_mode((WIDTH,HEIGHT))
-xms=50
-ymx=250
-wb=30
-hb=30
-#define colors
-colors={'white':[255,255,255], 'red':[255,0,0], 'aqua':[102,153, 255],
-'orange':[255,85,0],'purple':[48,25,52],'navy':[5,31,64],'pink':[200,3,75]}
-#Get colors
-background= colors.get('pink')
-randColor=''
-cr_color=colors.get('white')
-
-sq_color=colors.get('orange')
-sqM_color=colors.get('orange')
 #circle variables
 rad=15
 xc=random.randint(rad, WIDTH-rad)
 yc=random.randint(rad, HEIGHT-rad)
-
-
-#creatignfont types of font diffrent ones
-#definfing the title and instrucions
-
-TITLE_FNT=pygame.font.SysFont('comicsans', 60)
-MENU_FNT= pygame.font.SysFont('comicsans', 30)
-INST_FNT=pygame.font.SysFont('comicsans', 30)
-TITLE_FNT2=pygame.font.SysFont('comicsans', 40)
-MENU_FNT2= pygame.font.SysFont('comicsans', 20)
-INST_FNT2=pygame.font.SysFont('comicsans', 20)
-#showing what the title will say
-text=TITLE_FNT.render('Menu', 1, (255, 0, 0))
-wind.fill((255,255,255))
-texti=TITLE_FNT2.render('Circle Eats Square Game Instructions', 1, (255, 130, 0))
-#get the width of our text so that we can cente rteh title
-#x value should be equal tp the 1/2-width minue the width of the text/2
-xt=WIDTH/2-text.get_width()/2
-
-#list f messages
-menuList=['Instructions','Settings', 'Exit','jofk','iasjbkf','jkaf','ksdj']
-SettingList=['screensize','fnyt', 'backround', 'color', 'bifp', 'nvoano']
-#create the function for the menu for each of the parts
-txty=243
-menuSquare=pygame.Rect(xms,ymx,wb,hb)
-pygame.draw.rect(wind,sq_color, menuSquare)
-def mainnmenu(Mlist):
-    
-   
-    global txty
-    txty=243
-    wind=pygame.display.set_mode((WIDTH,HEIGHT))
-    pygame.display.set_caption('CIRCLE EATS SQUARE!!!!')
-    for i in range(7):
-        global menuSquare
-        message=menuList[i]
-        text=INST_FNT.render (message, 1, (0,255,0)) 
-        wind.blit(text,(90,txty))
-        pygame.draw.rect(wind,sq_color, menuSquare)
-        menuSquare.y+=62
-        txty +=62
-    menuSquare=pygame.Rect(xms,ymx,wb,hb)
-    pygame.draw.rect(wind,sqM_color, menuSquare)
-    pygame.display.update()
-    pygame.time.delay(200)
-#the size for each of the line of code of the instructions
-
-wind.blit(text, (xt,50))
-
-def screenThree():
-    wind=pygame.display.set_mode((700,700))
-    pygame.display.set_caption('Instructions for Circle eats Square')
-    #create first button for the isntrucions
-     #showing what the title will say
-    wind.fill((255,255,255))
-    wind.blit(texti, (40,50))
-    #showing what the instructions will say
-    text1=INST_FNT2.render ('In this game you must use your arrow keys to get the circle', 1, (0,255,0)) 
-    text2=INST_FNT2.render('to touch the square and once the circle touches the square', 1, (0,255,0)) 
-    text3=INST_FNT2.render('the cirlce will get bigger', 1, (0,255,0))
-    text4=INST_FNT2.render('GET THE CIRCLE AS BIG AS POSSIBLE!!!',1, (0,255,0))
-    wind.blit(text1,(0,169))
-    wind.blit(text2,(0,190))
-    wind.blit(text3,(0,210))
-    wind.blit(text4,(0,230))
-
-    
-
-#showing what the instructions will say
 
 #inscribed Square:
 ibox=int(rad*math.sqrt(2))
@@ -134,7 +58,51 @@ square=pygame.Rect(xs,ys,wbox,hbox)
 screen=pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption('Circle eats Square')
 
+#define colors
+colors={'white':[255,255,255], 'red':[255,0,0], 'aqua':[102,153, 255],
+'orange':[255,85,0],'purple':[48,25,52],'navy':[5,31,64],'pink':[200,3,75]}
+#Get colors
+background= colors.get('white')
+randColor=''
+cr_color=colors.get('aqua')
+sqM_color=colors.get('pink')
 
+#create fifferent type 
+TITLE_FNT=pygame.font.SysFont('comicsans', 80)
+MENU_FNT=pygame.font.SysFont('comicsans', 40)
+INST_FNT=pygame.font.SysFont('comicsans', 30)
+TITLE_FNT2=pygame.font.SysFont('comicsans', 40)
+MENU_FNT2= pygame.font.SysFont('comicsans', 20)
+INST_FNT2=pygame.font.SysFont('comicsans', 20)
+
+RETURN= MENU_FNT.render('return',1,(cr_color))
+#Create Title
+def TitleMenu(Message):
+    text=TITLE_FNT.render(Message, 1, (255,0,0))
+    #get the width  the text 
+    #x value = WIDTH/2 - wText/2
+    xt=WIDTH/2-text.get_width()/2
+    screen.blit(text,(xt,20))    
+
+#Create First button
+
+
+#Create square fr menu
+
+squareM=pygame.Rect(xMs,yMs,wb,hb)
+#This is a function uses a parameter
+def MainMenu(Mlist):
+    txty=243
+    squareM.y=250
+    for i in range(len(Mlist)):
+        message=Mlist[i]
+        text=INST_FNT.render(message,1,(51,131,51))
+        screen.blit(text,(90,txty))
+        pygame.draw.rect(screen,sqM_color, squareM )
+        squareM.y +=50
+        txty+=50
+    pygame.display.update()
+    pygame.time.delay(10)
 def changeColor():
     global randColor
     colorCheck=True
@@ -152,35 +120,53 @@ def changeColor():
 changeColor()
 sq_color=colors.get(randColor)
 
+
 MAX=10
 jumpCount=MAX
 JUMP=False
-
-
 while check:
-    square.y= 250
-    screen.fill(background)
-    mainnmenu(menuList)
+    
+    if MAIN:
+        screen.fill(background)
+        TitleMenu("MENU")
+        MainMenu(MenuList)
     for case in pygame.event.get():
         if case.type==pygame.QUIT:
             check=False
-    
-
-    keys=pygame.key.get_pressed() 
-# #this returns a list
+    keys=pygame.key.get_pressed() #this returns a list
     if case.type ==pygame.MOUSEBUTTONDOWN:
         mouse_pos=pygame.mouse.get_pos()
         print(mouse_pos)
-        if (( mouse_pos[0] > 20 and mouse_pos[0] <60) and (mouse_pos[1] > 250 and mouse_pos[1] < 290)):
-            screen.fill(background)
-            screenThree('INSTRUCTIONS')
+        if ((mouse_pos[0] >20 and mouse_pos[0] <60) and (mouse_pos[1] >250 and mouse_pos[1] <290)): 
+            MAIN=False
+            INST=True
+        if (( mouse_pos[0] > 200 and mouse_pos[0] <300) and (mouse_pos[1] > 650)):
+            MAIN=True
+            INST=False
 
-    
-        #     if keys[pygame.K_a] and square.x >=move:
+
+    if INST:
+        screen.fill(background)
+        TitleMenu("INSTRUCTIONS")
+        #showing what the instructions will say
+        text1=INST_FNT2.render ('In this game you must use your arrow keys to get the circle', 1, (0,255,0)) 
+        text2=INST_FNT2.render('to touch the square and once the circle touches the square', 1, (0,255,0)) 
+        text3=INST_FNT2.render('the cirlce will get bigger', 1, (0,255,0))
+        text4=INST_FNT2.render('GET THE CIRCLE AS BIG AS POSSIBLE!!!',1, (0,255,0))
+
+
+
+        #the size for each of the line of code of the instructions
+        screen.blit(text1,(0,230))
+        screen.blit(text2,(0,260))
+        screen.blit(text3,(0,290))
+        screen.blit(text4,(0,320))
+        screen.blit(RETURN,(250,650))
+
+#     if keys[pygame.K_a] and square.x >=move:
 #         square.x -= move #substract 5 from the x value
 #     if keys[pygame.K_d] and square.x <WIDTH-wbox:
 #         square.x += move  
-
 #     #Jumping part
 #     if not JUMP:
 #         if keys[pygame.K_w]:
@@ -196,8 +182,6 @@ while check:
 #         else:
 #             jumpCount=MAX
 #             JUMP=False
-
-
 
 # #Finish circle
 #     if keys[pygame.K_LEFT] and xc >=rad+move:
@@ -231,5 +215,3 @@ while check:
 
     pygame.display.update()
     pygame.time.delay(10)
-
-    mainnmenu
