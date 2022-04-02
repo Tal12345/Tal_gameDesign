@@ -65,6 +65,7 @@ p.draw.rect(wind,sqM_color, menuSquare)
 
 #list f messages
 menuList=['Instructions','Settings', 'Exit','jofk','iasjbkf','jkaf','ksdj']
+
 #create the function for the menu for each of the parts
 txty=243
 
@@ -72,7 +73,7 @@ for i in range(7):
     message=menuList[i]
     text=INST_FNT.render (message, 1, (0,255,0)) 
     wind.blit(text,(90,txty))
-    p.draw.rect(wind,sq_color, menuSquare)
+    p.draw.rect(wind,sqM_color, menuSquare)
     menuSquare.y+=62
     txty +=62
 #the size for each of the line of code of the instructions

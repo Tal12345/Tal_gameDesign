@@ -14,8 +14,10 @@
 # K_s                   down square
 # K_SPACE               jump
 #initialize pygame
-import os, random, time, pygame, math
+import os, random, time, pygame, math, datetime
+os.system('cls')
 from pickle import TRUE
+# name=input("What is your name?: ")
 #initialize pygame
 pygame.init()
 
@@ -31,9 +33,10 @@ MAIN=TRUE
 INST=False
 SETT=False
 LEV_I=False
+
 #List f messages
-MenuList=['Instructions','Settings', " ssfsdf","dasdas",'fdgdfg','asdasd','asdasd']
-SettingList=['Screen Size','Font Size','C','BC']
+MenuList=['Instructions','Settings', " Level 1","dasdas",'fdgdfg','asdasd','asdasd']
+settingsList=['Screensize','Circle color', 'Speed','Highscore','Sound']
 check=True #for the while loop
 move=5 #pixels
 #square variables
@@ -91,6 +94,11 @@ def TitleMenu(Message):
 
 squareM=pygame.Rect(xMs,yMs,wb,hb)
 #This is a function uses a parameter
+def returnFunction():
+   
+    settingsback = INST_FNT.render("Return",1,(158,33,37))   
+    screen.blit(settingsback,(250,HEIGHT-100)) 
+
 def MainMenu(Mlist):
     txty=243
     squareM.y=250
@@ -101,6 +109,8 @@ def MainMenu(Mlist):
         pygame.draw.rect(screen,sqM_color, squareM )
         squareM.y +=50
         txty+=50
+    if SETT:
+        returnFunction()
     pygame.display.update()
     pygame.time.delay(10)
 def changeColor():
@@ -120,7 +130,31 @@ def changeColor():
 changeColor()
 sq_color=colors.get(randColor)
 
+def returnFunction():
+   
+    settingsback = INST_FNT.render("Return",1,(158,33,37))   
+    screen.blit(settingsback,(250,HEIGHT-100)) 
 
+#This is a function uses a parameter
+def SettingMenu(Slist):
+    txty=243
+    squareM.y=250
+    for i in range(len(Slist)):
+        message=Slist[i]
+        text=INST_FNT.render(message,1,(51,131,51))
+        screen.blit(text,(90,txty))
+        pygame.draw.rect(screen,sqM_color, squareM )
+        squareM.y +=50
+        txty+=50
+
+def keepScore(score):
+    date=datetime.datetime.now()
+    print(date.strftime('%m/%d/%Y'))
+    # scoreLine=str(score)+"\t"+name+"\t"+date.strftime('%m/%d/%Y'+'\n')
+
+    myFile=open('firstCodes\Classtuff\cireate.txt','a')
+    # myFile.write(scoreLine)
+    myFile.close()
 MAX=10
 jumpCount=MAX
 JUMP=False
@@ -130,6 +164,12 @@ while check:
         screen.fill(background)
         TitleMenu("MENU")
         MainMenu(MenuList)
+    if SETT:
+        screen.fill(background)
+        TitleMenu("SETTINGS")
+        MainMenu(settingsList) 
+        returnFunction()
+       
     for case in pygame.event.get():
         if case.type==pygame.QUIT:
             check=False
@@ -137,12 +177,30 @@ while check:
     if case.type ==pygame.MOUSEBUTTONDOWN:
         mouse_pos=pygame.mouse.get_pos()
         print(mouse_pos)
-        if ((mouse_pos[0] >20 and mouse_pos[0] <60) and (mouse_pos[1] >250 and mouse_pos[1] <290)): 
+        if ((mouse_pos[0] >20 and mouse_pos[0] <70) and (mouse_pos[1] >250 and mouse_pos[1] <290)): 
             MAIN=False
             INST=True
+            SETT=False
         if (( mouse_pos[0] > 200 and mouse_pos[0] <300) and (mouse_pos[1] > 650)):
             MAIN=True
             INST=False
+            SETT=False
+        if (( mouse_pos[0] > 20 and mouse_pos[0] <70) and (mouse_pos[1]> 300 and mouse_pos[1] <390)):
+            MAIN=False
+            INST=False
+            SETT=True
+        if (( mouse_pos[0] > 200 and mouse_pos[0] <300) and (mouse_pos[1] > HEIGHT-100)and SETT):
+            MAIN=True
+            INST=False
+            SETT=False
+        # if (( mouse_pos[0]>20 and mouse_pos[0]< 70) and (mouse_pos[1]> 300 and mouse_pos[1]< 490)):
+        #     MAIN=False
+        #     INST=False
+        #     SETT=False
+        #     LEV_I=True
+
+
+
 
 
     if INST:
@@ -162,56 +220,63 @@ while check:
         screen.blit(text3,(0,290))
         screen.blit(text4,(0,320))
         screen.blit(RETURN,(250,650))
+        pygame.display.update()
 
-#     if keys[pygame.K_a] and square.x >=move:
-#         square.x -= move #substract 5 from the x value
-#     if keys[pygame.K_d] and square.x <WIDTH-wbox:
-#         square.x += move  
-#     #Jumping part
-#     if not JUMP:
-#         if keys[pygame.K_w]:
-#             square.y -= move
-#         if keys[pygame.K_s]:
-#             square.y += move   
-#         if keys[pygame.K_SPACE]:
-#             JUMP=True
-#     else:
-#         if jumpCount >=-MAX:
-#             square.y -= jumpCount*abs(jumpCount)/2
-#             jumpCount-=1
-#         else:
-#             jumpCount=MAX
-#             JUMP=False
 
-# #Finish circle
-#     if keys[pygame.K_LEFT] and xc >=rad+move:
-#         xc -= move #substract 5 from the x value
-#         insSquare.x -= move
-#     if keys[pygame.K_RIGHT] and xc <=WIDTH -(rad+move):
-#         xc += move #substract 5 from the x value  
-#         insSquare.x += move
-#     if keys[pygame.K_DOWN] and yc <=HEIGHT-(rad+move):
-#         yc += move #substract 5 from the x value
-#         insSquare.y += move
-#     if keys[pygame.K_UP] and yc >=rad+move:
-#         yc -= move #substract 5 from the x value  
-#         insSquare.y -= move
+def playGame():
+    keys=pygame.key.get_pressed()
+    square.x=random.randint(wbox, WIDTH-wbox)
+    
+    if keys[pygame.K_a] and square.x >=move:
+
+        square.x -= move #substract 5 from the x value
+    if keys[pygame.K_d] and square.x <WIDTH-wbox:
+        square.x += move  
+    #Jumping part
+    if not JUMP:
+        if keys[pygame.K_w]:
+            square.y -= move
+        if keys[pygame.K_s]:
+            square.y += move   
+        if keys[pygame.K_SPACE]:
+            JUMP=True
+    else:
+        if jumpCount >=-MAX:
+            square.y -= jumpCount*abs(jumpCount)/2
+            jumpCount-=1
+        else:
+            jumpCount=MAX
+            JUMP=False
+
+#Finish circle
+    if keys[pygame.K_LEFT] and xc >=rad+move:
+        xc -= move #substract 5 from the x value
+        insSquare.x -= move
+    if keys[pygame.K_RIGHT] and xc <=WIDTH -(rad+move):
+        xc += move #substract 5 from the x value  
+        insSquare.x += move
+    if keys[pygame.K_DOWN] and yc <=HEIGHT-(rad+move):
+        yc += move #substract 5 from the x value
+        insSquare.y += move
+    if keys[pygame.K_UP] and yc >=rad+move:
+        yc -= move #substract 5 from the x value  
+        insSquare.y -= move
         
-#     checkCollide = square.colliderect(insSquare)
-#     if checkCollide:
-#         square.x=random.randint(wbox, WIDTH-wbox)
-#         square.y=random.randint(hbox, HEIGHT-hbox)   
-#         changeColor()
-#         sq_color=colors.get(randColor)
-#         rad +=move
-#         ibox=int(rad*math.sqrt(2))
-#         startpoint = (int(xc-ibox/2),int(yc-ibox/2))
-#         insSquare=pygame.Rect(startpoint[0],startpoint[1],ibox,ibox)
+    checkCollide = square.colliderect(insSquare)
+    if checkCollide:
+        square.x=random.randint(wbox, WIDTH-wbox)
+        square.y=random.randint(hbox, HEIGHT-hbox)   
+        changeColor()
+        sq_color=colors.get(randColor)
+        rad +=move
+        ibox=int(rad*math.sqrt(2))
+        startpoint = (int(xc-ibox/2),int(yc-ibox/2))
+        insSquare=pygame.Rect(startpoint[0],startpoint[1],ibox,ibox)
         
     
-#     pygame.draw.rect(screen, sq_color, square)
-#     pygame.draw.rect(screen,cr_color, insSquare )
-#     pygame.draw.circle(screen, cr_color, (xc,yc), rad)
+    pygame.draw.rect(screen, sq_color, square)
+    pygame.draw.rect(screen,cr_color, insSquare )
+    pygame.draw.circle(screen, cr_color, (xc,yc), rad)
 
     pygame.display.update()
     pygame.time.delay(10)
