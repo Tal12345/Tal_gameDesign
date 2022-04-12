@@ -1,4 +1,5 @@
-#Tal Rogozinski
+#Tal
+
 #learning how to draw circles and rectangles
 #use keys to move objects
 #Using Dictionaries
@@ -17,8 +18,7 @@
 #initialize pygame
 
 import os, random, time, pygame, math, datetime
-from pickle import TRUE
-from re import L, T
+from turtle import screensize
 os.system('cls')
 name=input("What is your name? ")
 #initialize pygame
@@ -32,7 +32,6 @@ xMs=50
 yMs=250
 wb=30
 hb=30
-score=0
 MAIN=True
 INST=False
 SETT=False
@@ -40,17 +39,10 @@ LEV_I=False
 LEV_II=False
 LEV_III=False
 SCORE=False
-SIZE=False
-BACK=False
-SPRITE=False
-ON_OFF=False
-
-
 #List f messages
 MenuList=['Instructions','Settings', "Level I","Level II",'Level III','Scoreboard','Exit']
-SettingList=['Screen Size','Backgrnd Color','Icon','Sound']
-SizeList=['500x500', '800x800', '1000x1000']
-BC_list=['aqua','']
+SettingList=['Screen Size','Backgrnd Color','Icon','']
+sizeList=['1000 x 1000','800 x 800','600 x 600']
 check=True #for the while loop
 
 #create screen
@@ -70,40 +62,10 @@ BLACK=(0,0,0)
 TITLE_FNT=pygame.font.SysFont('comicsans', 80)
 MENU_FNT=pygame.font.SysFont('comicsans', 40)
 INST_FNT=pygame.font.SysFont('comicsans', 30)
-TITLE_FNT=pygame.font.SysFont('comicsans', 80)
-MENU_FNT=pygame.font.SysFont('comicsans', 40)
-INST_FNT=pygame.font.SysFont('comicsans', 30)
-TITLE_FNT2=pygame.font.SysFont('comicsans', 40)
-MENU_FNT2= pygame.font.SysFont('comicsans', 20)
-INST_FNT2=pygame.font.SysFont('comicsans', 20)
-RETURN= MENU_FNT.render('return',1,(cr_color))
 #Create square fr menu
 
 squareM=pygame.Rect(xMs,yMs,wb,hb)
 #Create Title
-def returnFunction():
-    global RETURN
-    RETURN= MENU_FNT.render('Return',1,(cr_color))
-    screen.blit(RETURN,(250,650))
-def scoreBoard():
-    myFile=open('firstCodes\Classtuff\cireate.txt', 'r')
-    yi=150
-    stuff=myFile.readlines()
-    myFile.close()
-    stuff.sort()
-    N=len(stuff)-1
-    temp=[]
-    j=200
-    for i in range(N, -1, -1):
-        print(stuff[i])
-        text=INST_FNT2.render(stuff[i],1,(0,0,0))
-        screen.blit(text,(20,j))
-        j+=50
-        pygame.display.update()
-        pygame.time.delay(10)
-
-
-
 def TitleMenu(Message):
     text=TITLE_FNT.render(Message, 1, (255,0,0))
     screen.fill((255,255,255))
@@ -122,7 +84,7 @@ def MainMenu(Mlist):
         pygame.draw.rect(screen,sqM_color, squareM )
         squareM.y +=50
         txty+=50
-    # pygame.display.update()
+    pygame.display.update()
     pygame.time.delay(10)
 def changeColor():
     global randColor
@@ -130,58 +92,71 @@ def changeColor():
     while colorCheck:
         randColor=random.choice(list(colors))
         if colors.get(randColor)==background:
-            
-            
+            print(randColor)
+            print(background)
             randColor=random.choice(list(colors))
         else:
             colorCheck=False
+
 def instr():
-    screen.fill(background)
-        #showing what the instructions will say
-    tym=TITLE_FNT.render('Instructions',1,(0,0,255))
-    text1=INST_FNT2.render ('In this game you must use your arrow keys to get the circle', 1, (255,85,0)) 
-    text2=INST_FNT2.render('to touch the square and once the circle touches the square', 1, (255,85,0)) 
-    text3=INST_FNT2.render('the cirlce will get bigger', 1, (255,85,0))
-    text4=INST_FNT2.render('GET THE CIRCLE AS BIG AS POSSIBLE!!!',1, (255,85,0))
+
+    print("in instr")
+    myFile=open('firstCodes\Classtuff\Circle east square\instructions.txt', 'r')
+    yi=150
+    stuff= myFile.readlines()
 
 
-
-        #the size for each of the line of code of the instructions
-    screen.blit(tym, (147, 20))
-    screen.blit(text1,(10,230))
-    screen.blit(text2,(10,260))
-    screen.blit(text3,(10,290))
-    screen.blit(text4,(10,320))
-    pygame.display.update()
+    print(stuff)
+    for line in stuff:
+        print(line)
+        text=INST_FNT.render(line, 1, BLACK)
+        screen.blit(text, (40,yi))
+        pygame.display.update()
+        pygame.time.delay(50)
+        yi+=50
+    myFile.close()
+def scoreBoard():
+    myFile=open('firstCodes\Classtuff\cireate.txt', 'r')
+    yi=150
+    stuff=myFile.readlines()
+    myFile.close()
+    stuff.sort()
+    N=len(stuff)-1
+    temp=[]
+    j=200
+    for i in range(N, -1, -1):
+        print(stuff[i])
+        text=INST_FNT.render(stuff[i],1,(0,0,0))
+        screen.blit(text,(20,j))
+        j+=50
+        pygame.display.update()
+        pygame.time.delay(10)
 def keepScore(score):
     date=datetime.datetime.now()
-    
-    scoreLine=str(score)+"\t"+name+"\t"+date.strftime('%m/%d/%Y'+'\n')
+    print(date.strftime('%m/%d/%Y'))
+    scoreLine='\n'+str(score)+"\t"+name+"\t"+date.strftime('%m/%d/%Y'+'\n')
  
     #open a file and write in it 
     # when y write it erases the prev 
     myFile=open('firstCodes\Classtuff\cireate.txt','a') 
     myFile.write(scoreLine)
     myFile.close()
-def changeSize(xm,ym):
+def changeScreenSize(xm,ym):
     global HEIGHT, WIDTH, screen
-    if ((xm>20 and xm<80) and (ym>250 and ym<290)):
-        HEIGHT=500
-        WIDTH=500
-    if ((xm>20 and xm<80) and (ym>300 and ym<340)):
-        HEIGHT=800
-        WIDTH=800
-    if ((xm>20 and xm<80) and (ym>350 and ym<390)):
+    if ((xm >20 and xm <80) and (ym >250 and ym <290)):
         HEIGHT=1000
         WIDTH=1000
+
+    if ((xm >20 and xm <80) and (ym >300 and ym <330)):
+        HEIGHT=800
+        WIDTH=800
+        
+    if ((xm >20 and xm <80) and (ym >350 and ym <380)):
+        HEIGHT=600
+        WIDTH=600
     screen=pygame.display.set_mode((WIDTH,HEIGHT))
-
-    # randsize=random.choice(Sizes)
-    # display=pygame.display.set_mode((randsize))
-       
+ 
 def playGame():
-
-
     move=5 #pixels
     #square variables
     xs=20
@@ -195,12 +170,12 @@ def playGame():
     #inscribed Square:
     ibox=int(rad*math.sqrt(2))
     startpoint = (int(xc-ibox/2),int(yc-ibox/2))
+    print(startpoint[0]-ibox,startpoint[1])
     insSquare=pygame.Rect(startpoint[0],startpoint[1],ibox,ibox)
     #creating the rect object
     square=pygame.Rect(xs,ys,wbox,hbox)
     global MAIN
     global LEV_I
-    global score
     startpoint = (int(xc-ibox/2),int(yc-ibox/2))
     insSquare=pygame.Rect(startpoint[0],startpoint[1],ibox,ibox)
     sq_color=colors.get(randColor)
@@ -208,7 +183,6 @@ def playGame():
     jumpCount=MAX
     JUMP=False
     run=True
-    count=0
     while run:
         screen.fill(background)
         keys=pygame.key.get_pressed()
@@ -217,8 +191,7 @@ def playGame():
                 run=False
                 MAIN=True
                 LEV_I=False
-                
-    
+                print ("I want out", run)
                 
         if keys[pygame.K_ESCAPE]:
             run=False        
@@ -259,8 +232,7 @@ def playGame():
         checkCollide = square.colliderect(insSquare)
         if checkCollide:
             square.x=random.randint(wbox, WIDTH-wbox)
-            square.y=random.randint(hbox, HEIGHT-hbox)
-            score+=5   
+            square.y=random.randint(hbox, HEIGHT-hbox)   
             changeColor()
             sq_color=colors.get(randColor)
             rad +=move
@@ -272,27 +244,25 @@ def playGame():
         pygame.draw.circle(screen, cr_color, (xc,yc), rad)
         pygame.display.update()
         pygame.time.delay(10)
-        if score >=25:
-            run=False
-            MAIN=True
-            LEV_I=False
-
-
-
-    
-
 #sq_color=colors.get('navy')
-
 #Making a rand c f the square
 changeColor()
+
+#==============================================
+#
+#Beginning  main prram
 sq_color=colors.get(randColor)
 keys=pygame.key.get_pressed()
 mouse_pos=(0,0)
-sjk=True
+screCk=True
 first=True
-ss=True
-xm=0
+xm=0 
 ym=0
+f_SEET=True
+sc_size=False
+set_first=True
+c_first=True
+ss=True
 while check:
     for case in pygame.event.get():
         if case.type==pygame.QUIT:
@@ -301,7 +271,7 @@ while check:
             mouse_pos=pygame.mouse.get_pos()
             xm= mouse_pos[0]
             ym= mouse_pos[1]
-        #print(mouse_pos)
+        # print(mouse_pos)
     keys=pygame.key.get_pressed() #this returns a list
     if MAIN:
         screen.fill(background)
@@ -311,38 +281,29 @@ while check:
         screen.fill(background)
         TitleMenu("INSTRUCTIONS")
         instr()
-        returnFunction()
         first=False
-    if SETT:
+    if INST:
+        if keys[pygame.K_ESCAPE]:
+            INST=False
+            MAIN=True
+            first=True
+    if SETT and f_SEET:
         screen.fill(background)
         TitleMenu("SETTINGS")
         MainMenu(SettingList)
-        returnFunction()
-    if SIZE and sjk:
-        print("Size")
-        screen.fill(background)
-        TitleMenu("SIZES")
-        MainMenu(SizeList)
-        changeSize(xm,ym)
-        returnFunction()
-        sjk=False
+        f_SEET=False
+    if SETT:
         if keys[pygame.K_ESCAPE]:
-            SIZE=False
-            SETT=True
-            sjk=True
-
-
-        
-
-
+            SETT=False
+            MAIN=True
+            f_SEET=True
     if LEV_I:
-        score=0
         screen.fill(background)
         playGame()
-        print("I shld be t")
         LEV_I=False
         MAIN=True
-        mouse_pos=(0,0)
+        xm=0
+        ym=0
     if LEV_II:
         screen.fill(background)
         TitleMenu("LEVEL II")
@@ -359,81 +320,58 @@ while check:
         screen.fill(background)
         TitleMenu("SCOREBOARD")
         scoreBoard()
-        returnFunction()
         ss=False
     if SCORE:
         if keys[pygame.K_ESCAPE]:
             SCORE=False
             MAIN=True
             ss=True
-
-    if ((xm >20 and xm <80) and (ym >250 and ym <290))and MAIN :
+    if ((xm >20 and xm <80) and (ym >250 and ym <290)) and MAIN:
         MAIN=False
         INST=True
-    if ((xm >20 and xm <80) and (ym >300 and ym <330)) and MAIN:
+    if ((xm >20 and xm <80) and (ym >300 and ym <330))and MAIN:
         MAIN=False
-        SETT=True
-        # if ((xm >20 and xm <80) and (ym >250 and ym <290)):
-        #     SETT=True
-        #     SIZE=True
-        #     MAIN=False
-    if ((xm >20 and xm <80) and (ym >350 and ym <380))and MAIN:
+        SETT=True  
+    if ((xm >20 and xm <80) and (ym >350 and ym <380))and MAIN :
         MAIN=False
-        LEV_I=True
-    if ((xm >20 and xm <80) and (ym >400 and ym <430))and MAIN:
+        LEV_I=True   
+    if ((xm >20 and xm <80) and (ym >400 and ym <430))and MAIN :
         MAIN=False
-        LEV_II=True
-    if ((xm >20 and xm <80) and (ym >450 and ym <480))or LEV_III:
+        LEV_II=True   
+    if ((xm >20 and xm <80) and (ym >450 and ym <480))and MAIN:
         MAIN=False
-        LEV_III=True
-
-      #250,650
-    
-    if ((xm >20 and xm <80) and (ym >500 and ym <530))or SCORE :
+        LEV_III=True   
+    if ((xm >20 and xm <80) and (ym >500 and ym <530))and MAIN:
         MAIN=False
-        SCORE=True
-    if ((xm > 250 and ym > 600) and INST):
-        MAIN=True
-        INST=False
-        first=True
-    if ((xm > 250 and ym > 600) and SCORE):
-        MAIN=True
-        SCORE=False
-        ss=True
-    if ((xm > 250 and ym > 600) and SETT):
-        MAIN=True
-        SETT=False
-    if ((xm >20 and xm <80) and (ym >250 and ym <290))and SETT :
-        SETT=False
-        SIZE=True
-    if ((xm >20 and xm <80) and (ym >300 and ym <330)) and SETT:
-        MAIN=False
-        BACK=True
-        
-        # if ((xm >20 and xm <80) and (ym >250 and ym <290)):
-        #     SETT=True
-        #     SIZE=True
-        #     MAIN=False
-    if ((xm >20 and xm <80) and (ym >350 and ym <380))and SETT:
-        SPRITE=False
-        SETT=False
-    if ((xm >20 and xm <80) and (ym >400 and ym <430))and SETT:
-        SETT=False
-        ON_OFF=True
-    if ((xm > 250 and ym > 600) and SIZE):
-        MAIN=True
-        INST=False
-        sjk=True
-    
-    # if (( xm > 200 and xm <300) and (ym > 650)):
-    #     MAIN=True
-    #     INST=False
-    #     SETT=False 
-        
+        SCORE=True 
+    if ((xm >20 and xm <80) and (ym >250 and ym <290)) and SETT and set_first:  
+        screen.fill(background)
+        TitleMenu("Screen Size")
+        MainMenu(sizeList )
+        sc_size=True
+        set_first=False
+        f_SEET=True
+        if keys[pygame.K_ESCAPE]:
+            sc_size=False
+            set_first=True
+    if sc_size and xm >0:
+        changeScreenSize(xm,ym)
+        screen.fill(background)
+        TitleMenu("Screen Size")
+        MainMenu(sizeList )
+        if keys[pygame.K_ESCAPE]:
+            sc_size=False
+            set_first=True
+    if ((xm >20 and xm <80) and (ym >300 and ym <330))and SETT and c_first:
+        screen.fill(background)
+        TitleMenu("Background Color")
+        c_first=False
+        if keys[pygame.K_ESCAPE]:
+            c_first=True
+            set_first=True
     if ((xm >20 and xm <80) and (ym >550 and ym <580)) :
         screen.fill(background)
-        
-        keepScore(score)
+        keepScore(121)
         text=INST_FNT.render("Make sure you update the score file", 1, BLACK)
         screen.blit(text, (40,200))
         text=INST_FNT.render("before you exit", 1, BLACK)
@@ -450,7 +388,4 @@ while check:
     pygame.time.delay(10)
 
 os.system('cls')
-#firstCodes\Classtuff\paperROck.py
-#firstCodes\Classtuff
-#C:\Users\RogozinskiT25\OneDrive - Greenhill School\Desktop\New folder\Tal_gameDesign\firstCodes\Classtuff
-#C:\Users\RogozinskiT25\OneDrive - Greenhill School\Desktop\New folder\Tal_gameDesign\firstCodes\Classtuff\o.py
+pygame.quit()
