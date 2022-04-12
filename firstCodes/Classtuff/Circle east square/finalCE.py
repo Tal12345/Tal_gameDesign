@@ -96,7 +96,9 @@ def changeColor():
             randColor=random.choice(list(colors))
         else:
             colorCheck=False
+
 def instr():
+
     print("in instr")
     myFile=open('firstCodes\Classtuff\Circle east square\instructions.txt', 'r')
     yi=150
@@ -112,37 +114,22 @@ def instr():
         pygame.time.delay(50)
         yi+=50
     myFile.close()
-def keepScore(score):
-    date=datetime.datetime.now()
-    print(date.strftime('%m/%d/%Y'))
-    scoreLine=str(score)+"\t"+name+"\t"+date.strftime('%m/%d/%Y'+'\n')
- 
-    #open a file and write in it 
-    # when y write it erases the prev 
-    myFile=open('firstCodes\Classtuff\cireate.txt','a') 
-    myFile.write(scoreLine)
-    myFile.close()
 def scoreBoard():
     myFile=open('firstCodes\Classtuff\cireate.txt', 'r')
     yi=150
-    stuff= myFile.readlines()
+    stuff=myFile.readlines()
     myFile.close()
     stuff.sort()
     N=len(stuff)-1
     temp=[]
-    j=0
+    j=200
     for i in range(N, -1, -1):
-        print(i,stuff[i])
-        # temp[j]=stuff[i]
-        #     j +=1
-        # print(temp)
-        # for i in range(N):
-        #     text=INST_FNT.render(temp[i], 1, BLACK)
-        #     screen.blit(text, (40,yi))
-        #     pygame.display.update()
-        #     pygame.time.delay(50)
-        #     yi+=50
-    
+        print(stuff[i])
+        text=INST_FNT.render(stuff[i],1,(0,0,0))
+        screen.blit(text,(20,j))
+        j+=50
+        pygame.display.update()
+        pygame.time.delay(10)
 def keepScore(score):
     date=datetime.datetime.now()
     print(date.strftime('%m/%d/%Y'))
@@ -274,6 +261,7 @@ f_SEET=True
 sc_size=False
 set_first=True
 c_first=True
+ss=True
 while check:
     for case in pygame.event.get():
         if case.type==pygame.QUIT:
@@ -327,17 +315,16 @@ while check:
         if keys[pygame.K_ESCAPE]:
             LEV_III=False
             MAIN=True
-    if SCORE and screCk:
+    if SCORE and ss:
         screen.fill(background)
         TitleMenu("SCOREBOARD")
         scoreBoard()
-        #call funct t print scres
-        screCk=False
+        ss=False
     if SCORE:
         if keys[pygame.K_ESCAPE]:
             SCORE=False
             MAIN=True
-            screCk=True
+            ss=True
     if ((xm >20 and xm <80) and (ym >250 and ym <290)) and MAIN:
         MAIN=False
         INST=True
