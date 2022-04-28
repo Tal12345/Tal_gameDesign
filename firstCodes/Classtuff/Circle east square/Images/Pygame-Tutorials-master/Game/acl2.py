@@ -5,7 +5,7 @@ import pygame as p
 	#initialize pygame
 p.init()
 	
-win = p.display.set_mode((400,400))
+win = p.display.set_mode((500,500))
 p.display.set_caption("first game")
 	
 walkRight = [p.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\R1.png'), p.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\R2.png'), p.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\R3.png'), p.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\R4.png'), p.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\R5.png'), p.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\R6.png'), p.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\R7.png'), p.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\R8.png'), p.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\R9.png')]
@@ -13,7 +13,7 @@ walkLeft = [p.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-
 char = p.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\standing.png')
 bg=p.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\\bg.jpg')
 	
-x = 50 
+x = 50
 y = 425
 width = 64
 height = 64
@@ -23,7 +23,7 @@ jumpCount = 10
 left = False
 right = False
 walkCount = 0
- 
+	 
 def redrawgamewindow():
     global walkCount
     win.blit(bg, (0,0))
@@ -33,22 +33,25 @@ def redrawgamewindow():
         win.blit(walkLeft[walkCount//3], (x,y))
         walkCount += 1
     elif right:
-        win.blit(walkRight[walkCount//3], (x,y))
+        win.blit(walkRight[walkCount//3], (x,y))        
         walkCount += 1
-    else:
+    else:        
         win.blit(char, (x,y))
-    p.display.update()
-   
+        
+        p.display.update()
+	    
 clock = p.time.Clock()
-#mainloop
+	
+	#mainloop
 run = True
 while run:
     clock.tick(27)
-   
+    
     redrawgamewindow()
     for event in p.event.get():
         if event.type == p.QUIT:
             run = False
+
     keys = p.key.get_pressed()
     if keys[p.K_LEFT] and x > move:
         x -= move
@@ -79,3 +82,4 @@ while run:
             isJump = False
             jumpCount = 10
 p.quit()
+

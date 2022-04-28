@@ -5,10 +5,11 @@ win = pygame.display.set_mode((500,480))
 
 pygame.display.set_caption("First Game")
 
-walkRight = [pygame.image.load('R1.png'), pygame.image.load('R2.png'), pygame.image.load('R3.png'), pygame.image.load('R4.png'), pygame.image.load('R5.png'), pygame.image.load('R6.png'), pygame.image.load('R7.png'), pygame.image.load('R8.png'), pygame.image.load('R9.png')]
-walkLeft = [pygame.image.load('L1.png'), pygame.image.load('L2.png'), pygame.image.load('L3.png'), pygame.image.load('L4.png'), pygame.image.load('L5.png'), pygame.image.load('L6.png'), pygame.image.load('L7.png'), pygame.image.load('L8.png'), pygame.image.load('L9.png')]
-bg = pygame.image.load('bg.jpg')
-char = pygame.image.load('standing.png')
+walkRight = [pygame.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\R1.png'), pygame.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\R2.png'), pygame.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\R3.png'), pygame.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\R4.png'), pygame.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\R5.png'), pygame.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\R6.png'), pygame.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\R7.png'), pygame.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\R8.png'), pygame.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\R9.png')]
+walkLeft = [pygame.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\L1.png'), pygame.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\L2.png'), pygame.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\L3.png'), pygame.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\L4.png'), pygame.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\L5.png'), pygame.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\L6.png'), pygame.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\L7.png'), pygame.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\L8.png'), pygame.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\L9.png')]
+char = pygame.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\standing.png')
+bg=pygame.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\\bg.jpg')
+	
 
 clock = pygame.time.Clock()
 
