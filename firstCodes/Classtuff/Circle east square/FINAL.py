@@ -442,6 +442,10 @@ while check:
         TitleMenu("SCOREBOARD")
         scoreBoard()
         ss=False
+        if keys[pygame.K_ESCAPE]:
+            SCORE=False
+            MAIN=True
+            ss=True
     if SCORE:
         if keys[pygame.K_ESCAPE]:
             SCORE=False
