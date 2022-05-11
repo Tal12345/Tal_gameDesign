@@ -425,7 +425,6 @@ while check:
         screen.fill(background)
         TitleMenu("LEVEL II")
         playGame2()
-        hamm()
         if keys[pygame.K_ESCAPE]:
             LEV_II=False
             MAIN=True
@@ -433,7 +432,6 @@ while check:
         screen.fill(background)
         TitleMenu("LEVEL III")
         playGame3()
-        hamm()
         if keys[pygame.K_ESCAPE]:
             LEV_III=False
             MAIN=True
