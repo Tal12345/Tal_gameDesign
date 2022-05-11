@@ -1,6 +1,3 @@
-# Tal Rogozinski 
-# 5/10/2022
-# Whak-A-Mole Game!
 
 
 # My first step is going to be to import my necesarry libraries
@@ -38,9 +35,9 @@ screen=p.display.set_mode((WIDTH,HEIGHT))
 p.display.set_caption('Whak-A-Mole')
 
 #Creating my backround for the game
-l1backround=p.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\\fiveHoles.png')
-l1background=p.transform.scale(l1backround,(WIDTH,HEIGHT ))
-screen.blit(l1background,(0,0))
+l3background= p.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\scene.gif')
+l3background= p.transform.scale(l3background,(700,600))
+screen.blit(l3background,(0,0))
 mole=p.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\molebigger.png')
 deadmole=p.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\deadmolepng.png')
 hammer=p.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\hammer.png')
@@ -55,14 +52,14 @@ count = 0
 #coordinates for the holes
 # making my hammer replace my cursor
 # I used this to help me replace the cursor with my hammer
-def hamm():
-    #making the cursor invisible but it still has all of its functions
-    p.mouse.set_visible(False)
-    mouse_pos=p.mouse.get_pos()
-    x_mouse=mouse_pos[0]
-    y_mouse=mouse_pos[1]
-    # puting hammer in the x,y pos of the mouse
-    screen.blit(hammer,(x_mouse,y_mouse))
+# def hamm():
+#     #making the cursor invisible but it still has all of its functions
+#     p.mouse.set_visible(False)
+#     mouse_pos=p.mouse.get_pos()
+#     x_mouse=mouse_pos[0]
+#     y_mouse=mouse_pos[1]
+#     # puting hammer in the x,y pos of the mouse
+#     screen.blit(hammer,(x_mouse,y_mouse))
 # Timer that counts down to thirty and ends the game
 def timer():
     elapsed_time= time.time() - start_time
@@ -90,7 +87,7 @@ while check:
     while (timer()-max ==0):
         
     # my background
-        screen.blit(l1background,(0,0))
+        screen.blit(l3background,(0,0))
        
         # hamm()
         screen.blit(mole,randmole)
@@ -106,7 +103,7 @@ while check:
     if wack:
         print("hit")
         print(randmole)
-        screen.blit(l1background,(0,0))
+        screen.blit(l3background,(0,0))
         screen.blit(deadmole,randmole)
         p.display.update()
         p.time.delay(500)
@@ -114,20 +111,3 @@ while check:
         xm=0
         count +=1
     
-
-
-   
-
-
-    
-    
-
-
-
-
-
-
-
-    
-
-

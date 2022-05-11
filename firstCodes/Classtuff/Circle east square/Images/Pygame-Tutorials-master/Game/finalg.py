@@ -36,7 +36,37 @@ LEV_I=False
 LEV_II=False
 LEV_III=False
 SCORE=False
+WIDTH=700
+HEIGHT=600
+check=True
+wack = False
+#square variables
+hitx = 20 
+hity = 30 
+hitwidth = 50 
+hitlength = 90
+hitbox=p.Rect(hitx,hity,hitwidth,hitlength)
+moles=[(435,0),(170,80),(362,200),(158,390),(424,410)]
+moles2=
+# create screen
+screen=p.display.set_mode((WIDTH,HEIGHT))
+p.display.set_caption('Whak-A-Mole')
 
+#Creating my backround for the game
+l1backround=p.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\\fiveHoles.png')
+l1background=p.transform.scale(l1backround,(WIDTH,HEIGHT ))
+screen.blit(l1background,(0,0))
+mole=p.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\molebigger.png')
+deadmole=p.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\deadmolepng.png')
+hammer=p.image.load('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\hammer.png')
+deadmole=p.transform.scale(deadmole,(90,100))
+mole=p.transform.scale(mole,(90,100))
+hammer=p.transform.scale(hammer,(20,20))
+time_limit = 30
+start_time=time.time()
+xm=0
+ym=0
+count = 0
 #List the list messages
 MenuList=['Instructions','Settings', "Level I","Level II",'Level III','Scoreboard','Exit']
 SettingList=['Screen Size','Backgrnd Color','Icon','']
@@ -140,28 +170,85 @@ def changeScreenSize(xm,ym):
         HEIGHT=600
         WIDTH=600
     screen=p.display.set_mode((WIDTH,HEIGHT))
+# def hamm():
+#     #making the cursor invisible but it still has all of its functions
+#     p.mouse.set_visible(False)
+#     mouse_pos=p.mouse.get_pos()
+#     x_mouse=mouse_pos[0]
+#     y_mouse=mouse_pos[1]
+#     # puting hammer in the x,y pos of the mouse
+#     screen.blit(hammer,(x_mouse,y_mouse))
+def timer():
+    elapsed_time= time.time() - start_time
+    moleTime=time_limit - int(elapsed_time)
+    #print(moleTime)
+    if elapsed_time > time_limit:
+        print("game over")
+        exit()
+    return moleTime
 def levelone():
-    p.display.bilt('firstCodes\Classtuff\Circle east square\Images\Pygame-Tutorials-master\Game\word-image-8.webp')
+    global wack
+    while check:
+    # For when you clcik out of the game
+        for case in p.event.get():
+            if case.type==p.QUIT:
+                check=False
+            if case.type==p.MOUSEBUTTONDOWN:
+                mouse_pos=p.mouse.get_pos()
+                xm=mouse_pos[0]
+                ym=mouse_pos[1]
+        print(xm,ym)
+        # count down
+        max=timer()
+        print(max)
+        
+        randmole=random.choice(moles)
+        while (timer()-max ==0):
+            
+        # my background
+            screen.blit(l1background,(0,0))
+        
+            # hamm()
+            screen.blit(mole,randmole)
+            p.display.update() 
 
-#sq_color=colors.get('navy')
-#Making a rand c f the square
-changeColor()
+        #Create square fr menu
+        #randomizing where the mole will pop up by ranodmizing the coordinates in the list
+        # mouse pos for when wacking
+        if xm>randmole[0]:
+            wack=True
+            print(xm,randmole[0])
+        # for when you click/wack on the mole
+        if wack:
+            print("hit")
+            print(randmole)
+            screen.blit(l1background,(0,0))
+            screen.blit(deadmole,randmole)
+            p.display.update()
+            p.time.delay(500)
+            wack=False
+            xm=0
+            count +=1
 
-#==============================================
-#
-#Beginning  main prram
-sq_color=colors.get(randColor)
-keys=p.key.get_pressed()
-mouse_pos=(0,0)
-screCk=True
-first=True
-xm=0 
-ym=0
-f_SEET=True
-sc_size=False
-set_first=True
-c_first=True
-ss=True
+    #sq_color=colors.get('navy')
+    #Making a rand c f the square
+    changeColor()
+
+    #==============================================
+    #
+    #Beginning  main prram
+    sq_color=colors.get(randColor)
+    keys=p.key.get_pressed()
+    mouse_pos=(0,0)
+    screCk=True
+    first=True
+    xm=0 
+    ym=0
+    f_SEET=True
+    sc_size=False
+    set_first=True
+    c_first=True
+    ss=True
 while check:
     for case in p.event.get():
         if case.type==p.QUIT:

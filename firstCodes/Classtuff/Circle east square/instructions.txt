@@ -1,5 +1,5 @@
 In this game the objective is to 
-get the circle to eat/touch the
-square 5 times as fast as possi-
-bl
+click on the mole whenever it pops
+up and as fast as possible while
+the game is running
 \
