@@ -104,15 +104,15 @@ def MainMenu(Mlist):
     pygame.time.delay(10)
 # This funcion replaces my cursor with a hammer I learned how to do this from this site, https://stackoverflow.com/questions/26451227/how-to-make-an-image-follow-the-mouse-cursor-in-pygame
 
-def hamm():
-    #making the cursor invisible but it still has all of its functions
-    pygame.mouse.set_visible(False)
-    mouse_pos=pygame.mouse.get_pos()
-    x_mouse=mouse_pos[0]
-    y_mouse=mouse_pos[1]
-    # puting hammer in the x,y pos of the mouse
-    screen.blit(hammer,(x_mouse,y_mouse))
-# This function uses a file in which I wrote out my instructions for the game
+# def hamm():
+#     #making the cursor invisible but it still has all of its functions
+#     pygame.mouse.set_visible(False)
+#     mouse_pos=pygame.mouse.get_pos()
+#     x_mouse=mouse_pos[0]
+#     y_mouse=mouse_pos[1]
+#     # puting hammer in the x,y pos of the mouse
+#     screen.blit(hammer,(x_mouse,y_mouse))
+# # This function uses a file in which I wrote out my instructions for the game
 def instr():
 
     print("in instr")
